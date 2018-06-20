@@ -8,12 +8,32 @@
  */
 ?>
 
-<?php if ( is_active_sidebar( 'sidebar-1' )  ) : ?>
-	<aside id="secondary" class="sidebar widget-area" role="complementary">
-		<?php dynamic_sidebar( 'sidebar-1' ); ?>
-	</aside><!-- .sidebar .widget-area -->
-<?php endif; ?>
 
+
+    <section class="sidebar "><h2 class="sidebar-click">Меню сайту</h2>
+        <? wp_nav_menu( array(
+            'menu'            => '',              
+            'container'       => 'nav',           
+            'container_class' => 'sidebar-navigation',          
+            'menu_class'      => 'sidebar-menu',         
+            'echo'            => true,            
+            
+            'depth'           => 0,              
+            'walker'          => new Sidebar_Walker_Nav_Menu(),     
+            'theme_location'=>'left-menu',
+            
+            ) );
+        ?>
+    </section>
+
+
+    <?php if ( is_active_sidebar( 'sidebar-1' )  ) : ?>
+        <aside id="secondary" class="sidebar widget-area" role="complementary">
+            <?php dynamic_sidebar( 'sidebar-1' ); ?>
+        </aside><!-- .sidebar .widget-area -->
+    <?php endif; ?>
+
+<!--
 <section class="sidebar "><h2 class="sidebar-click">Меню сайту</h2>
             <nav class="sidebar-navigation">
               <h2 >Меню сайту</h2>
@@ -58,3 +78,4 @@
           
             
 </section>
+-->

@@ -1,10 +1,14 @@
 <?
 
-
 add_theme_support( 'custom-logo', array(
     'height'      => 170,
     'width'       => 436,
     'flex-width' => true,
+  ) );
+
+add_theme_support( 'custom-header', array(
+    'header-text'   => true,
+    
   ) );
 
 /**********  MENU  ************/
@@ -12,26 +16,49 @@ add_theme_support( 'custom-logo', array(
 register_nav_menus(array(
   'header-menu'    => 'Верхнє меню',    
   'footer-menu' => 'Нижнє меню',
-  'side'   => 'Боковє меню'
+  'left-menu'   => 'Боковє меню'
 ));
 
 
-// Изменяет класс у вложенного ul
-add_filter( 'nav_menu_submenu_css_class', 'filter_nav_menu_submenu_css_class', 10, 3 );
-function filter_nav_menu_submenu_css_class( $classes, $args, $depth ) {
-  if ( $args->theme_location === 'header-menu' ) {
-    $classes = [
-      'menu',
-      'menu--dropdown',
-      'menu--vertical'
-    ];
+/********** -----  ************/
+class  True_Walker_Nav_Menu extends Walker_Nav_Menu { 
+  function start_lvl(&$output, $depth = 0, $args = array()) {
+   $output .= "\n<ul class=\"popup-drop-down\">\n"; 
   }
-  return $classes;
-}
-/**********  MENU  ************/
+ 
 
-/**********  MENU  ************/
+  function display_element($element, &$children_elements, $max_depth, $depth = 0, $args, &$output) {
+   if ( $element->current ) $element->classes[] = 'active'; 
 
+   $element->is_dropdown = !empty( $children_elements[$element->ID] );
+    
+    if ( $element->is_dropdown ) { 
+      if ( $depth === 0 ) {
+       $element->classes[] = 'menu-drop-down'; 
+      } 
+    } 
+    parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output); }
+} 
+/**********  Sidebar menu  ************/
+
+class  Sidebar_Walker_Nav_Menu extends Walker_Nav_Menu { 
+  function start_lvl(&$output, $depth = 0, $args = array()) {
+   $output .= "\n<ul class=\"popup-drop-left\">\n"; 
+  }
+ 
+  
+  function display_element($element, &$children_elements, $max_depth, $depth = 0, $args, &$output) {
+   if ( $element->current ) $element->classes[] = 'active'; 
+
+   $element->is_dropdown = !empty( $children_elements[$element->ID] );
+    
+    if ( $element->is_dropdown ) { 
+      if ( $depth === 0 ) {
+       $element->classes[] = 'menu-drop-left'; 
+      } 
+    } 
+    parent::display_element($element, $children_elements, $max_depth, $depth, $args, $output); }
+} 
 
 
 
@@ -42,7 +69,7 @@ function wp_breadcrumbs() {
   $text['category'] = 'Архив рубрики "%s"'; // текст для страницы рубрики
   $text['search'] = 'Результаты пошуку по запросу "%s"'; // текст для страницы с результатами поиска
   $text['tag'] = 'Записи с тегом "%s"'; // текст для страницы тега
-  $text['author'] = 'Статьи автора %s'; // текст для страницы автора
+  $text['author'] = 'Статті автора %s'; // текст для страницы автора
   $text['404'] = 'Помілка 404'; // текст для страницы 404
   $text['page'] = 'Сторінка %s'; // текст 'Страница N'
   $text['cpage'] = 'Сторінка комментариев %s'; // текст 'Страница комментариев N'

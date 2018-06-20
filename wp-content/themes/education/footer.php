@@ -58,7 +58,7 @@
         <footer class="copyright-footer ">
          2018 Всі права захищені
         </footer>
-     </div> <!-- end container -->
+     </div> <!-- end container   -->
   
 
   <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>

@@ -7,33 +7,33 @@
  * @since Education 1.0
  */
 
-get_header(); ?>
+get_header(); 
 
+$post_id = get_post( $post->ID, ARRAY_A);
+?>
 
+<div class="row two-col">
+          
+          <?php get_sidebar(); ?>
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
-		<?php
-		// Start the loop.
-		while ( have_posts() ) : the_post();
+	<main class="main-content page-inner">
+	        
+	    <section class="page-information">
+	        <h1 ><?= the_title();?></h1>
 
-			// Include the page content template.
-			get_template_part( 'template-parts/content', 'page' );
+	        <div class="img">
+	            <a href="about"><img src="<?php bloginfo('template_url' ); ?>/images/about-school.jpg" alt="" /></a>
+	            <a href="about"><img src="<?php bloginfo('template_url' ); ?>/images/about-banner.jpg" alt="" /></a>
+	        </div>
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) {
-				comments_template();
-			}
-
-			// End of the loop.
-		endwhile;
-		?>
+				<?= $post_id['post_content']; ?> 
+		</section>	
 
 	</main><!-- .site-main -->
 
-	<?php get_sidebar( 'content-bottom' ); ?>
+	
 
-</div><!-- .content-area -->
+</div> <!-- end row -->
 
-<?php get_sidebar(); ?>
+<?php //get_sidebar(); ?>
 <?php get_footer(); ?>

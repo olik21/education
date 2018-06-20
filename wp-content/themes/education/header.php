@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <meta charset="<?php bloginfo( 'charset' ); ?>">
+    <meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>" charset="<?php bloginfo('charset'); ?>" />
   
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     
-    <title>Комунальний заклад «Обдарованість»</title>
+    <title><?= bloginfo('name');  ?></title>
+    <meta name="keywords" content="<?php bloginfo('keywords'); ?>"/>
+    <meta name="description" content="<?php bloginfo('description'); ?>" />
+
+
+
    
     <link rel="stylesheet" href="<?php bloginfo('template_url' ); ?>/css/reset.css" >
     <link rel="stylesheet" href="<?php bloginfo('template_url' ); ?>/css/bootstrap-grid.css" >
@@ -16,6 +21,7 @@
     <link rel="stylesheet" href="<?php bloginfo('template_url' ); ?>/css/style.css" >
     <link rel="stylesheet" href="<?php bloginfo('template_url' ); ?>/css/font-awesome.min.css">
 
+    <?php wp_head(); ?>
  
   </head>
  
@@ -47,6 +53,7 @@
             the_custom_logo();
            }
         }?>
+          <p> <? get_custom_header();?></p>
           <p>Комунальний заклад «Обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів «Обдарованість» Харківської обласної ради»</p>
         </div>
         
@@ -83,7 +90,7 @@
             'echo'            => true,            // (boolean) Выводить на экран или возвращать для обработки
             
             'depth'           => 0,               // (integer) Глубина вложенности (0 - неограничена, 2 - двухуровневое меню)
-            'walker'          => '',              // (object) Класс собирающий меню. Default: new Walker_Nav_Menu
+            'walker'          => new True_Walker_Nav_Menu(),              // (object) Класс собирающий меню. Default: new Walker_Nav_Menu
             'theme_location'=>'header-menu',
             
           ) );
