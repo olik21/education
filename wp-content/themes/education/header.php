@@ -53,7 +53,7 @@
             the_custom_logo();
            }
         }?>
-          <p> <? get_custom_header();?></p>
+          <p> <img src="<?php header_image(); ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" />></p>
           <p>Комунальний заклад «Обласна спеціалізована школа-інтернат ІІ-ІІІ ступенів «Обдарованість» Харківської обласної ради»</p>
         </div>
         

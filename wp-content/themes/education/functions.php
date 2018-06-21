@@ -8,7 +8,7 @@ add_theme_support( 'custom-logo', array(
 
 add_theme_support( 'custom-header', array(
     'header-text'   => true,
-    
+    'uploads'       => true,
   ) );
 
 /**********  MENU  ************/
